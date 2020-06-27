@@ -12,8 +12,10 @@ print(m_py_dct)
 
 for i in range(df.shape[0]):
     s_py = df.iloc[i,0]
+    s_py = "nan" if str(s_py).lower() == "nan" else s_py
     for j in range(1, df.shape[1]):
         s_py_map = df.iloc[i,0]
+        s_py_map = "nan" if str(s_py_map).lower() == "nan" else s_py_map
         s_type = ls_col[j]
 
         m_py_dct[s_type][s_py] = {"val":s_py_map, "type":s_type}
@@ -22,4 +24,5 @@ for i in range(df.shape[0]):
 # # print(m_out)
 
 with open("all_pinyin_map.json", "w", encoding='utf-8') as fp:
-    fp.write(json.dumps(m_py_dct, ensure_ascii=False))
+    json.dump(m_py_dct, fp, indent=4, ensure_ascii=False)
+   
